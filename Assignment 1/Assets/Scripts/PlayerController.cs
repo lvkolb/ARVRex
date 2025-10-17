@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -6,11 +7,19 @@ public class PlayerController : MonoBehaviour
     public float speed;
     private const float MIN_ROLL_VELOCITY_SQRT = 0.01f; // Magnitude of 0.1 squared
 
+    [SerializeField]
+    private int _collectScore = 1; // Give it a default value, e.g., 1
+
+    public UnityEvent<int> OnPickupCollected;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
+
+            OnPickupCollected.Invoke(_collectScore);
+
             SoundManager.PlaySound(SoundType.PICKUP);
         }
     }

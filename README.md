@@ -26,7 +26,7 @@ UnityProjectsUXDM/
 
 This diagram illustrates how your individual feature work flows back into the main development branch.
 
-```mermaid
+mermaid
 gitGraph
     commit id: "Initial Commit"
     branch assignment1-dev

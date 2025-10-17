@@ -1,32 +1,41 @@
-# UnityProjectsUXDM - Team Git Workflow
+# Unity Projects Team Git Workflow
 
-This repository contains multiple Unity assignments. This guide explains how to collaborate safely using Git, either via **command-line** or **GitHub Desktop / App**.
+A beginner-friendly guide to collaborating on Unity projects using Git.
 
 ---
 
-## 🗂 Repository Structure
+## 📁 What's in This Repository?
 
-UnityProjectsUXDM/ 
-├── Assignment 1/ 
-│ ├── Assets/ 
-│ ├── Packages/ 
-│ └── ProjectSettings/ 
-├── Assignment 2/ 
-├── .gitignore 
+```
+UnityProjectsUXDM/
+├── Assignment 1/
+│   ├── Assets/
+│   ├── Packages/
+│   └── ProjectSettings/
+├── Assignment 2/
+├── .gitignore
 └── README.md
+```
 
-
-- Each `Assignment` folder is a separate Unity project.
-- `.gitignore` ensures Unity-generated folders (`Library/`, `Temp/`, `Logs/`, `Obj/`, `Build/`) are not tracked.
-- Unity `.meta` files are included — **do not remove them**.
+- **Each Assignment folder** = A separate Unity project
+- **.gitignore** = Tells Git to ignore temporary Unity files
+- **.meta files** = Unity's tracking files (important - don't delete!)
 
 ---
 
-## 🗺 Branching Workflow
+## 🌳 How We Organize Our Work (Branches)
 
-This diagram illustrates how your individual feature work flows back into the main development branch.
+Think of branches like separate workspaces:
 
-mermaid
+| Branch Name | What It's For |
+|-------------|---------------|
+| `main` | Final, submitted versions only |
+| `assignment1-dev` | Where we build Assignment 1 together |
+| `feature/your-name` | Your personal workspace for experiments |
+
+### Visual Workflow
+
+```mermaid
 gitGraph
     commit id: "Initial Commit"
     branch assignment1-dev
@@ -45,108 +54,171 @@ gitGraph
     merge feature/enemy-ai tag: "AI Merged"
     checkout main
     merge assignment1-dev tag: "A1 Submitted"
-Branch	Purpose
-main	Stable, submitted versions
-assignment1-dev	Development for Assignment 1
-feature/...	Individual work/experiments
+```
 
-🌱 Initial Setup
-1. Clone the repo
+**How it works:** You work on your own branch → Test it → Merge into `assignment1-dev` → When everything's done, merge into `main`
 
-Command-line:
+---
 
-Bash
-git clone [https://github.com/lvkolb/UnityProjectsUXDM.git](https://github.com/lvkolb/UnityProjectsUXDM.git)
-cd UnityProjectsUXDM
-GitHub Desktop / App: Open the app. File → Clone repository → Paste the URL https://github.com/lvkolb/UnityProjectsUXDM.git. Choose a local path.
+## 🚀 Getting Started (One-Time Setup)
 
-2. Switch to your development branch
+### Option A: Using Command Line
 
-Command-line:
+1. **Clone (download) the repository**
+   ```bash
+   git clone https://github.com/lvkolb/UnityProjectsUXDM.git
+   cd UnityProjectsUXDM
+   ```
 
-Bash
-git checkout assignment1-dev
-GitHub Desktop / App: In the branch dropdown, select assignment1-dev. If the branch does not exist locally, fetch from origin first.
+2. **Switch to the development branch**
+   ```bash
+   git checkout assignment1-dev
+   ```
 
-🌿 Daily Workflow (Command-Line)
-Update your branch
+### Option B: Using GitHub Desktop
 
-Bash
+1. Open GitHub Desktop
+2. Click **File → Clone repository**
+3. Paste this URL: `https://github.com/lvkolb/UnityProjectsUXDM.git`
+4. Choose where to save it on your computer
+5. Use the branch dropdown at the top to switch to `assignment1-dev`
+
+---
+
+## 💼 Daily Workflow
+
+### Using Command Line
+
+**Step 1: Start your day by getting the latest changes**
+```bash
 git checkout assignment1-dev
 git pull origin assignment1-dev
-Create a feature branch for your work
+```
 
-Bash
-git checkout -b feature/<your-feature-name>
-Work in Unity Save scenes, prefabs, scripts, and materials. Unity automatically regenerates Library/ and other temporary files (ignored by Git).
+**Step 2: Create your own workspace (feature branch)**
+```bash
+git checkout -b feature/your-feature-name
+```
+*Example:* `feature/player-movement` or `feature/ui-menu`
 
-Stage and commit your changes
+**Step 3: Work in Unity**
+- Open the Unity project
+- Make your changes
+- Save scenes, prefabs, and scripts
+- Unity will auto-create temporary files (Git ignores these automatically)
 
-Bash
+**Step 4: Save your work to Git**
+```bash
 git add .
-git commit -m "Describe your changes here"
-Push your branch to GitHub
+git commit -m "Added player jump mechanic"
+```
 
-Bash
-git push -u origin feature/<your-feature-name>
-Open a Pull Request on GitHub Merge feature branch into assignment1-dev when reviewed.
+**Step 5: Upload your branch to GitHub**
+```bash
+git push -u origin feature/your-feature-name
+```
 
-🌿 Daily Workflow (GitHub Desktop / App)
-Open the repo in the app.
+**Step 6: Request to merge your work**
+- Go to GitHub in your browser
+- Click "Create Pull Request"
+- Wait for a teammate to review
+- Once approved, merge into `assignment1-dev`
 
-Switch to assignment1-dev branch.
+---
 
-Click Fetch origin to get latest changes.
+### Using GitHub Desktop
 
-Create a new branch for your feature (e.g., feature/my-ui-fix).
+1. **Open GitHub Desktop** and make sure you're in the right repository
+2. **Switch to `assignment1-dev`** using the branch dropdown
+3. **Click "Fetch origin"** to download latest changes
+4. **Create a new branch** (Branch → New Branch)
+   - Name it something like `feature/my-ui-fix`
+5. **Work in Unity** and save your changes
+6. **Return to GitHub Desktop**
+   - You'll see your changed files listed
+   - Write a description of what you did
+   - Click "Commit to feature/..."
+7. **Click "Push origin"** to upload your changes
+8. **Click "Create Pull Request"** to request merging your work
 
-Work in Unity and save changes.
+---
 
-In GitHub Desktop: Stage all changes → Commit with a meaningful message.
+## ⚙️ Unity-Specific Important Notes
 
-Publish Branch (if necessary) → Push to remote → Create Pull Request on GitHub.
+### ✅ Always Do This
 
-⚡ Unity-Specific Notes
-Always include .meta files — Unity relies on them.
+- **Include .meta files** - Unity needs these to work properly
+- **Enable text serialization** (makes teamwork easier):
+  1. Open Unity
+  2. Go to **Edit → Project Settings → Editor**
+  3. Set **Asset Serialization** to **Force Text**
+  4. Set **Version Control Mode** to **Visible Meta Files**
 
-Do not commit the following folders (they should be in .gitignore):
+### ❌ Never Commit These Folders
 
-Library/
+Git should automatically ignore these (thanks to `.gitignore`):
+- `Library/` - Unity's cache
+- `Temp/` - Temporary files
+- `Logs/` - Log files
+- `Obj/` - Build objects
+- `Build/` or `Builds/` - Compiled game builds
 
-Temp/
+**Why?** These are huge and Unity regenerates them automatically.
 
-Logs/
+---
 
-Obj/
+## 🤝 Team Collaboration Tips
 
-Build/ or Builds/
+1. **Always pull before you start working** - Get your teammates' latest changes
+2. **Commit often with clear messages** - "Fixed player jump" is better than "stuff"
+3. **Use feature branches** - Keeps your experiments separate from the main work
+4. **Ask for reviews** - Don't merge directly into `assignment1-dev` without asking
+5. **Communicate** - Tell your team what you're working on to avoid conflicts
 
-Enable text serialization in Unity for merge-friendly scenes and prefabs:
+---
 
-Edit → Project Settings → Editor → Asset Serialization → Force Text
+## 📝 Quick Reference: Git Commands
 
-Version Control → Visible Meta Files
+| What You Want to Do | Command |
+|---------------------|---------|
+| Download the project for the first time | `git clone <repo-url>` |
+| Switch to a different branch | `git checkout <branch-name>` |
+| Create a new branch | `git checkout -b feature/my-feature` |
+| Get latest changes from GitHub | `git pull origin <branch-name>` |
+| See what files you changed | `git status` |
+| Prepare files to save | `git add .` |
+| Save your changes with a note | `git commit -m "your message"` |
+| Upload your branch to GitHub | `git push -u origin <branch-name>` |
 
-Optional: Consider using Git LFS for very large assets like .fbx, .wav, or .psd.
+---
 
-🧠 Team Tips
-Pull from assignment1-dev before starting work.
+## 🆘 Common Questions
 
-Commit often with clear messages.
+**Q: What if I made changes in the wrong branch?**  
+A: Don't panic! Ask a teammate or your instructor for help with `git stash`.
 
-Feature branches help avoid conflicts.
+**Q: What if two people edited the same file?**  
+A: Git will ask you to resolve the "merge conflict." Open the file, choose which changes to keep, then commit.
 
-Only merge into assignment1-dev after review.
+**Q: Can I delete my feature branch after merging?**  
+A: Yes! Once it's merged into `assignment1-dev`, you can safely delete it.
 
-Avoid committing Library and other temporary files.
+**Q: GitHub Desktop vs Command Line?**  
+A: Both do the same thing! Use whichever feels more comfortable.
 
-📝 Quick Git Command Cheat Sheet
-Task	Command-Line
-Clone repo	git clone <repo-url>
-Switch branch	git checkout <branch>
-Create new branch	git checkout -b <branch>
-Pull latest changes	git pull origin <branch>
-Stage changes	git add .
-Commit changes	git commit -m "message"
-Push branch	git push -u origin <branch>
-Check status	git status
+---
+
+## 🎯 Quick Start Checklist
+
+- [ ] Clone the repository
+- [ ] Switch to `assignment1-dev` branch
+- [ ] Set up Unity text serialization
+- [ ] Create your feature branch
+- [ ] Make your changes
+- [ ] Commit and push
+- [ ] Create a pull request
+- [ ] Celebrate! 🎉
+
+---
+
+**Remember:** Git saves your work history. Don't be afraid to experiment - you can always go back!

@@ -5,10 +5,10 @@
 
 # Ignore Library, Temp, Obj, Build, Logs, UserSettings for all projects
 */[Ll]ibrary/
+*/[Pp]ackageCache/
 */[Tt]emp/
 */[Oo]bj/
-*/[Bb]uild/
-*/[Bb]uilds/
+*/[Bb]uild*/
 */[Ll]ogs/
 */[Uu]ser[Ss]ettings/
 

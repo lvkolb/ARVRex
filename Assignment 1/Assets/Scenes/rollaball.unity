@@ -1473,7 +1473,7 @@ MonoBehaviour:
   timerText: {fileID: 414047588}
   winLoseText: {fileID: 491843907}
   timeLimit: 90
-  fireworksPrefab: {fileID: 100000, guid: 6746092d79f3e4fe1bfa983603238e26, type: 3}
+  fireworksPrefab: {fileID: 919132149155446097, guid: a32f4809eb54fda488f75e47a476b1c4, type: 3}
   scoreController: {fileID: 554694726}
 --- !u!4 &98690568
 Transform:

@@ -21,5 +21,7 @@ public class CameraController : MonoBehaviour
             smoothSpeed * Time.deltaTime
         );
         transform.position = smoothedPosition;
+
+     
     }
 }

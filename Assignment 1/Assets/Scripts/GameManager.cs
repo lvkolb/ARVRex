@@ -89,7 +89,11 @@ public class GameManager : MonoBehaviour
             // 7j) Firework/Confetti Particle System
             if (fireworksPrefab != null)
             {
-                Instantiate(fireworksPrefab, transform.position, Quaternion.identity);
+                Vector3 playerPos = scoreController.transform.position;
+
+                Vector3 spawnPos = playerPos + Vector3.up * 2f;
+
+                Instantiate(fireworksPrefab, spawnPos, Quaternion.identity);
             }
         }
         else

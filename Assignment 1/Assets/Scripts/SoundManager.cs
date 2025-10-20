@@ -16,12 +16,21 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource rollingAudioSource;
     [SerializeField] private AudioSource oneShotAudioSource;
 
+    [SerializeField] private AudioSource backgroundMusic;
+    public AudioClip backgroundMusicClip;
+
+
     private void Awake()
     {
-        instance = this;   
+        instance = this;
+
     }
     private void Start()
     {
+        if (backgroundMusicClip != null)
+        {
+            PlayBackgroundMusic(false, backgroundMusicClip);
+        }
     }
     public static void PlaySound(SoundType sound, float volume = 1) //Soundtype, volume preset 1
     {
@@ -67,7 +76,31 @@ public class SoundManager : MonoBehaviour
             instance.rollingAudioSource.Stop();
         }
     }
+
+    public void PlayBackgroundMusic(bool resetSong, AudioClip audioClip = null)
+    {
+        if (audioClip != null)
+        {
+            backgroundMusic.clip = audioClip;
+        }
+        if (backgroundMusic.clip != null)
+        {
+            Debug.Log($"Playing BGM: {backgroundMusic.clip.name}, Loop: {backgroundMusic.loop}");
+            if (resetSong)
+            {
+                backgroundMusic.Stop();
+            }
+            backgroundMusic.Play();
+        }
+        else
+        {
+            Debug.LogError("No background music clip assigned!");
+        }
+    }
+
 }
+
+
 [Serializable]
 public struct SoundList
 {
